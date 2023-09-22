@@ -1,0 +1,20 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+#high-scores {
+  color: navy;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+#timer, 
+#sec,
+#ms {
+  /* display: none; */
+  font-size: 30px;
+  font-weight: 400;
+}
+
