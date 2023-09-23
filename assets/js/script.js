@@ -27,24 +27,27 @@ var score = localStorage.getItem("score");
   }
  ]
 
- 
+
 // create header for question
 var questionPrompt = document.createElement("h2");
 // create ordered list element
 var answerChoices = document.createElement("ol");
- // create ordered list items for answers
+// create ordered list items for answers
 var choice1 = document.createElement("li");
 var choice2 = document.createElement("li");
 var choice3 = document.createElement("li");
 var choice4 = document.createElement("li");
+// create correct/incorrect element
+var answerResultP = document.createElement("p");
 
-
+// use target to condense this (activity 26)
 choice1.addEventListener("click", function() {
   var answerIndex = index - 1;
   var answerChosen = questions[answerIndex].choices[0];; 
   if (answerChosen === questions[answerIndex].answer) {
     score+=5;
   } else { 
+  secondsLeft -= 5;
 }
   questionCycle();
   });
@@ -54,7 +57,8 @@ choice2.addEventListener("click", function() {
   if (answerChosen === questions[answerIndex].answer) {
     score+=5;
   } else { 
-    }
+  secondsLeft -= 5;
+}
   questionCycle();
 });
 choice3.addEventListener("click", function() {
@@ -62,8 +66,15 @@ choice3.addEventListener("click", function() {
   var answerChosen = questions[answerIndex].choices[2];; 
   if (answerChosen === questions[answerIndex].answer) {
     score+=5;
+    answerResultP.textContent = "Correct";
+    answerResultP.style.order = "3";
+    document.querySelector("#question-container").appendChild(answerResultP);
   } else { 
-    }
+    secondsLeft -= 5;
+    answerResultP.textContent = "Inorrect"
+    answerResultP.style.order = "3";
+    document.querySelector("#question-container").appendChild(answerResultP);
+}
   questionCycle();
 });
 choice4.addEventListener("click", function() {
@@ -72,7 +83,8 @@ choice4.addEventListener("click", function() {
   if (answerChosen === questions[answerIndex].answer) {
     score+=5;
   } else { 
-    }
+  secondsLeft -= 5;
+}
   questionCycle();
 });
 
@@ -82,7 +94,14 @@ function timerStart() {
     msEl.textContent = msLeft;
     secondsEl.textContent = secondsLeft;
 
-    if (msLeft === 0) {
+    // if game over show score or timer runs out, end game
+    if (index > 3) {
+      questionPrompt.textContent = "All done";
+      score += secondsLeft / 2;
+      answerChoices.textContent = "score: " + score;
+      answerResultP.textContent = "";
+    clearInterval(timerInterval);
+    } else if (msLeft === 0) {
       secondsLeft -= 1;
       msLeft = 10;
     } else if (secondsLeft === 0) {
@@ -94,7 +113,7 @@ function timerStart() {
 }
 
 function reduceTime() {
-  secondsLeft -= 15;
+  secondsLeft -= 5;
 }
 
 function startQuiz () {
@@ -105,9 +124,9 @@ function startQuiz () {
 }
 
 function questionCycle() {
-  if (index > 3) {
-  questionPrompt.textContent = "All done";
-  answerChoices.textContent = "score: " + score;
+  // if (index > 3) {
+  // questionPrompt.textContent = "All done";
+  // answerChoices.textContent = "score: " + score;
   
   // index = 0;
     // console.log(score)
@@ -115,22 +134,23 @@ function questionCycle() {
     // document.querySelector("#start-quiz").style.display = "block";
     // document.querySelector("#question-container").style.display = "none";
 
-  } else {
-  questionPrompt.textContent = questions[index].question;
-  choice1.textContent = questions[index].choices[0];
-  choice2.textContent = questions[index].choices[1];
-  choice3.textContent = questions[index].choices[2];
-  choice4.textContent = questions[index].choices[3];
-  // append question prompt
-  document.querySelector("#question-container").appendChild(questionPrompt);
-  // append ordered list for answers
-  document.querySelector("#question-container").appendChild(answerChoices);
-  // append answer text as list item in answerChoices
-  answerChoices.appendChild(choice1);
-  answerChoices.appendChild(choice2);
-  answerChoices.appendChild(choice3);
-  answerChoices.appendChild(choice4);
-  // increase index value so that it goes to next question when function is called again
-  index += 1;
-  }
+  // } else {
+    questionPrompt.textContent = questions[index].question;
+    choice1.textContent = questions[index].choices[0];
+    choice2.textContent = questions[index].choices[1];
+    choice3.textContent = questions[index].choices[2];
+    choice4.textContent = questions[index].choices[3];
+    // append question prompt
+    document.querySelector("#question-container").appendChild(questionPrompt);
+    // append ordered list for answers
+    document.querySelector("#question-container").appendChild(answerChoices);
+    // append answer text as list item in answerChoices
+    answerChoices.appendChild(choice1);
+    answerChoices.appendChild(choice2);
+    answerChoices.appendChild(choice3);
+    answerChoices.appendChild(choice4);
+    // increase index value so that it goes to next question when function is called again
+    index += 1;
+  // }
 }
+

@@ -51,4 +51,15 @@ h2 {
 
 li {
   font-size: 20px;
+  cursor: pointer;
+  background-color: blueviolet;
+  border-radius: 4px;
+  padding: 12px;
+  margin-top: 15px;
+  width: 100%;
 }
+
+ol {
+  width: 100%;
+}
+
