@@ -3,8 +3,10 @@ var msEl = document.querySelector("#ms");
 var secondsLeft = 29;
 var msLeft = 10;
 var index = 0;
-var score = localStorage.getItem("score");
- var questions = [
+var score = 0;
+localStorage.getItem("score");
+var endQuiz = false;
+var questions = [
   {
     question: "question 1",
     choices: ["text 1", "text 2", "text 3", "text 4"],
@@ -27,7 +29,6 @@ var score = localStorage.getItem("score");
   }
  ]
 
-
 // create header for question
 var questionPrompt = document.createElement("h2");
 // create ordered list element
@@ -40,31 +41,11 @@ var choice4 = document.createElement("li");
 // create correct/incorrect element
 var answerResultP = document.createElement("p");
 
-// use target to condense this (activity 26)
-choice1.addEventListener("click", function() {
-  var answerIndex = index - 1;
-  var answerChosen = questions[answerIndex].choices[0];; 
-  if (answerChosen === questions[answerIndex].answer) {
-    score+=5;
-  } else { 
-  secondsLeft -= 5;
-}
-  questionCycle();
-  });
-choice2.addEventListener("click", function() {
-  var answerIndex = index - 1;
-  var answerChosen = questions[answerIndex].choices[1];; 
-  if (answerChosen === questions[answerIndex].answer) {
-    score+=5;
-  } else { 
-  secondsLeft -= 5;
-}
-  questionCycle();
-});
-choice3.addEventListener("click", function() {
-  var answerIndex = index - 1;
-  var answerChosen = questions[answerIndex].choices[2];; 
-  if (answerChosen === questions[answerIndex].answer) {
+answerChoices.addEventListener("click", function(event) {
+  // event.stopPropagation();
+  var answerIndex = index;
+    var answerChosen = event.target;
+  if (answerChosen.textContent === questions[answerIndex].answer) {
     score+=5;
     answerResultP.textContent = "Correct";
     answerResultP.style.order = "3";
@@ -74,33 +55,26 @@ choice3.addEventListener("click", function() {
     answerResultP.textContent = "Inorrect"
     answerResultP.style.order = "3";
     document.querySelector("#question-container").appendChild(answerResultP);
-}
-  questionCycle();
-});
-choice4.addEventListener("click", function() {
-  var answerIndex = index - 1;
-  var answerChosen = questions[answerIndex].choices[3];; 
-  if (answerChosen === questions[answerIndex].answer) {
-    score+=5;
-  } else { 
-  secondsLeft -= 5;
-}
-  questionCycle();
+  } 
+// check if on last index of last question in questions array and either end quiz or move to next question
+  if (index === questions.length - 1) {
+    showScore()
+  } else {
+// increase index value so that it goes to next question when function is called again
+    index += 1;
+    questionCycle();
+  }
 });
 
+// start countdown timer for quiz
 function timerStart() {
   var timerInterval = setInterval(function() {
     msLeft--;
     msEl.textContent = msLeft;
     secondsEl.textContent = secondsLeft;
 
-    // if game over show score or timer runs out, end game
-    if (index > 3) {
-      questionPrompt.textContent = "All done";
-      score += secondsLeft / 2;
-      answerChoices.textContent = "score: " + score;
-      answerResultP.textContent = "";
-    clearInterval(timerInterval);
+    if (endQuiz) {
+      clearInterval(timerInterval);
     } else if (msLeft === 0) {
       secondsLeft -= 1;
       msLeft = 10;
@@ -112,45 +86,66 @@ function timerStart() {
   }, 100);
 }
 
-function reduceTime() {
-  secondsLeft -= 5;
-}
-
 function startQuiz () {
   document.querySelector("#start-quiz").style.display = "none";
   questionCycle()
   timerStart()
-
 }
 
 function questionCycle() {
-  // if (index > 3) {
-  // questionPrompt.textContent = "All done";
-  // answerChoices.textContent = "score: " + score;
-  
-  // index = 0;
-    // console.log(score)
-    // score = 0;
-    // document.querySelector("#start-quiz").style.display = "block";
-    // document.querySelector("#question-container").style.display = "none";
+  questionPrompt.textContent = questions[index].question;
+  choice1.textContent = questions[index].choices[0];
+  choice2.textContent = questions[index].choices[1];
+  choice3.textContent = questions[index].choices[2];
+  choice4.textContent = questions[index].choices[3];
+  // append question prompt
+  document.querySelector("#question-container").appendChild(questionPrompt);
+  // append ordered list for answers
+  document.querySelector("#question-container").appendChild(answerChoices);
+  // append answer text as list item in answerChoices
+  answerChoices.appendChild(choice1);
+  answerChoices.appendChild(choice2);
+  answerChoices.appendChild(choice3);
+  answerChoices.appendChild(choice4);    
+}
 
-  // } else {
-    questionPrompt.textContent = questions[index].question;
-    choice1.textContent = questions[index].choices[0];
-    choice2.textContent = questions[index].choices[1];
-    choice3.textContent = questions[index].choices[2];
-    choice4.textContent = questions[index].choices[3];
-    // append question prompt
-    document.querySelector("#question-container").appendChild(questionPrompt);
-    // append ordered list for answers
-    document.querySelector("#question-container").appendChild(answerChoices);
-    // append answer text as list item in answerChoices
-    answerChoices.appendChild(choice1);
-    answerChoices.appendChild(choice2);
-    answerChoices.appendChild(choice3);
-    answerChoices.appendChild(choice4);
-    // increase index value so that it goes to next question when function is called again
-    index += 1;
-  // }
+function showScore() {
+  endQuiz = true;
+  document.querySelector("#correct-bonus").innerHTML = "+" + score;
+  document.querySelector("#time-bonus").innerHTML = "+" + secondsLeft / 2;
+  document.querySelector("#score-total").innerHTML = "+" + (score += secondsLeft / 2);
+  document.querySelector("#score").style.display = "flex";
+  document.querySelector("#question-container").style.display = "none";
+}
+
+document.querySelector("#submit").addEventListener("click", function () {
+  window.location = "leaderboard.html";
+  storeScore();
+})
+
+// localStorage.setItem("scored", "[]");
+
+// console.log(storedScores);
+
+function storeScore() {
+  var scoreToStore = {
+    initials: document.querySelector("#initials").value,
+    playerScore: score,
+  };
+  var storedScores = JSON.parse(localStorage.getItem("scored")) || [];
+  // storedScores.push(JSON.stringify(scoreToStore));
+  storedScores.push((scoreToStore));
+  console.log((storedScores))
+  localStorage.setItem("scored", (JSON.stringify(storedScores)));
+}
+
+function restart() {
+  index = 0;
+  score = 0;
+  secondsLeft = 29;
+  msLeft = 10;
+  document.querySelector("#question-container").style.display = "flex";
+  questionCycle()
+  timerStart()
 }
 

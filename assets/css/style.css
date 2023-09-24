@@ -63,3 +63,39 @@ ol {
   width: 100%;
 }
 
+#score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  display: none;
+}
+
+#score h2 {
+  margin: 15px 0 0 0;
+  /* display: none; */
+}
+
+#math {
+  display: flex;
+  justify-content: center;
+}
+
+#correct-bonus {
+  text-align: right;
+}
+
+#score-bonus {
+  text-align: right;
+}
+
+#score-breakdown {
+  padding-left: 75px;
+}
+  
+/* #submit {
+  display: inline;
+}
+
+#initials {
+  display: inline;
+} */
