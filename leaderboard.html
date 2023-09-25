@@ -9,11 +9,15 @@
 
 </head>
 <body>
-  <section id="score-board">
-<p id="name"></p>
-<p id="score"></p>
+  <h1>Leaderboard</h1>
+  <section id="scoreboard">
+    <ol id="initials"></ol>
+    <ul id="scores"></ul>
   </section>
-  <button onclick="resetScores()"></button>
+  <section>
+    <button onclick="resetScores()">Reset Scores</button>
+    <button onclick="tryAgain()">Take Quiz</button>
+  </section>
   <script src="./assets/js/leaderboard.js"></script>
 </body>
 </html>

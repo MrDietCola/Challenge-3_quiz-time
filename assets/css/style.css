@@ -57,6 +57,7 @@ li {
   padding: 12px;
   margin-top: 15px;
   width: 100%;
+  color: white;
 }
 
 ol {
@@ -68,6 +69,10 @@ ol {
   flex-direction: column;
   align-items: center;
   display: none;
+  border: 3px solid navy;
+  border-radius: 4px;
+  padding: 20px;
+  width: fit-content;
 }
 
 #score h2 {
@@ -92,10 +97,8 @@ ol {
   padding-left: 75px;
 }
   
-/* #submit {
-  display: inline;
+#center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-
-#initials {
-  display: inline;
-} */

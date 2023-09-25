@@ -14,32 +14,33 @@
   </header>
   <section id="start-quiz">
     <h1>Quiz</h1>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Maiores a sint optio eum ipsa ullam vitae molestias, impedit esse consequuntur architecto incidunt dolore nobis aliquid nostrum debitis totam alias. Cum?</p>
+    <p>This is a quiz to test general knowledge. This will not be easy, you will have to dive into the deepest parts of history to find the answers. Good luck...</p>
     <button onclick="startQuiz()">Start</button>
   </section>
 
-  <section id="score">
-    <h2>Score Breakdown</h2>
-    <section id="math">
-      <section>
-        <p>Correct</p>
-        <p>Time Bonus</p>
-        <h3>SCORE</h3>
+  <section id="center">
+    <section id="score">
+      <h2>Score Breakdown</h2>
+      <section id="math">
+        <section>
+          <p>Correct</p>
+          <p>Time Bonus</p>
+          <h3>SCORE</h3>
+        </section>
+        <section id="score-breakdown">
+          <p id="correct-bonus">+15</p>
+          <p id="time-bonus">+10</p>
+          <h3 id="score-total">25</h3>
+        </section>
       </section>
-      <section id="score-breakdown">
-        <p id="correct-bonus">+15</p>
-        <p id="time-bonus">+10</p>
-        <h3 id="score-total">25</h3>
+      <section id="submit-container">
+        <input type="text" id="initials" placeholder="initials...">
+        <button id="submit">Submit</button>
       </section>
     </section>
-    <section id="submit-container">
-      <input type="text" id="initials">
-      <button id="submit">Submit</button>
-    </section>
+    <p id="alert"></p>
   </section>
-
   <main id="question-container"></main>
   <script src="./assets/js/script.js"></script>
-  <button onclick="restart()">reset</button>
 </body>
 </html>
