@@ -6,7 +6,7 @@ https://mrdietcola.github.io/Challenge-3_quiz-time/
 
 This is a timed quiz about random facts that are not connected to each other. The quiz will allow you to answer 4 questions within 30s and every time you get a question right, you are awarded 5 points and when you get the question wrong, you lose 5s off the timer. The quiz alos allows you to store your initials and score to a local leaderboard and clear that leaderboard. 
 
-[Alt text](<Screenshot (9).png>)
+![screenshot](<Screenshot (9).png>)
 ## Installation
 
 N/A
