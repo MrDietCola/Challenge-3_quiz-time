@@ -51,11 +51,13 @@ answerChoices.addEventListener("click", function(event) {
     score+=5;
     answerResultP.textContent = "Correct";
     answerResultP.style.order = "3";
+    answerResultP.style.padding = "15px";
     document.querySelector("#question-container").appendChild(answerResultP);
   } else { 
     secondsLeft -= 5;
     answerResultP.textContent = "Incorrect"
     answerResultP.style.order = "3";
+    answerResultP.style.padding = "15px";
     document.querySelector("#question-container").appendChild(answerResultP);
   } 
 // check if on last index of last question in questions array and either end quiz or move to next question

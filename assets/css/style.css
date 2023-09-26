@@ -17,7 +17,9 @@ header {
   font-size: 30px;
   font-weight: 400;
 }
-
+h1 {
+  padding-bottom: 15px;
+}
 #start-quiz {
   text-align: center;
   margin: 10px 10%;
@@ -73,16 +75,35 @@ ol {
   border-radius: 4px;
   padding: 20px;
   width: fit-content;
+  margin-bottom: 20px;
 }
 
 #score h2 {
   margin: 15px 0 0 0;
-  /* display: none; */
 }
 
 #math {
   display: flex;
   justify-content: center;
+  margin-bottom: 15px;
+}
+
+#score-breakdown p {
+  text-align: right;
+}
+
+#math p {
+  font-size: 22px;
+  padding: 10px 0 10px 0;
+}
+
+#math h3 {
+  font-size: 26px;
+  padding: 10px 0 10px 0;
+}
+
+a:hover {
+cursor: pointer;
 }
 
 #correct-bonus {
@@ -101,4 +122,20 @@ ol {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+button {
+  margin-top: 15px;
+  padding: 15px;
+  background-color: purple;
+  color: white;
+  border: 2px solid purple;
+  border-radius: 4px;
+}
+
+input {
+  margin-top: 15px;
+  padding: 15px;
+  border: 2px solid grey;
+  border-radius: 4px;
 }
