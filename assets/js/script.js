@@ -30,7 +30,7 @@ var questions = [
   }
  ]
 
-// create header for question prompt
+// create header    question prompt
 var questionPrompt = document.createElement("h2");
 // create ordered list element
 var answerChoices = document.createElement("ol");
@@ -158,3 +158,9 @@ function storeScore() {
   window.location = "leaderboard.html";
 });
 
+$(".buy-tickets").on("click", function (event) {
+  event.stopPropagation()
+  console.log('clicked');
+  var url = tempEvents[$(this).parent().parent().children().eq(2).attr('id').slice(-1)].eventTicketUrl
+  window.open( url, '_blank')
+})

@@ -1,6 +1,6 @@
 # Challenge-3_quiz-time
 
-https://mrdietcola.github.io/Challenge-3_quiz-time/
+https://Seidler93.github.io/Challenge-3_quiz-time/
 
 ## Description
 
